@@ -13,9 +13,15 @@ const todoSchema = new mongoose.Schema(
             ref: "userId"
         },
 
-        todo: [{ type:String, ref: "todo" }],
+        todo: {
+            type: String,
+            ref: "todo"
+        },
 
-        done: [{ type: mongoose.Schema.ObjectId, ref: "done" }]
+        done: {
+            type: String,
+            ref: "done",
+        }
 
     },
 

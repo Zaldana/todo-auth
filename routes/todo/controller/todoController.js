@@ -81,15 +81,22 @@ async function markDone(req, res) {
 
         } else {
 
-            let updatedTodo = await Todo.findByIdAndUpdate(
+            let doneTodo = foundTodo.todo
+
+            let doneTodoUpdate = await Todo.findByIdAndUpdate(
                 req.params.id,
-                req.body,
+                {
+                    done: doneTodo,
+                    todo: null
+                },
                 {
                     new: true
                 }
             );
 
-            res.json({ message: "success", payload: updatedTodo })
+            await foundUser.save();
+
+            res.json({ message: "success", payload: doneTodoUpdate })
 
         }
 
@@ -139,5 +146,6 @@ module.exports = {
     getAllTodos,
     createTodo,
     updateTodo,
+    markDone,
     deleteTodo,
 }
